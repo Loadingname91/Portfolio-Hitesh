@@ -3,53 +3,6 @@
   "github": "Loadingname91",
   "projects": [
     {
-      "cat": "Agents",
-      "title": "n8n → LangGraph Workflow Converter",
-      "kicker": "Agent tooling · 2025",
-      "blurb": "A three-phase prompt orchestration framework that turns exported n8n workflow JSON into production LangGraph code: requirements analysis, custom-node logic extraction, then paradigm-aware implementation generation. Proven end to end on an outbound sales email campaign.",
-      "tags": [
-        "LangGraph",
-        "n8n",
-        "Prompt orchestration",
-        "Python"
-      ],
-      "repo": "https://github.com/mentorstudents-org/n8n-to-langgraph",
-      "gif": null,
-      "featured": true,
-      "metrics": [
-        [
-          "Phases",
-          "3"
-        ],
-        [
-          "Paradigms",
-          "2"
-        ],
-        [
-          "Stars",
-          "9"
-        ],
-        [
-          "Forks",
-          "4"
-        ]
-      ],
-      "arch": [
-        "n8n JSON",
-        "Requirements spec",
-        "Custom logic extract",
-        "LangGraph codegen",
-        "Validated output"
-      ],
-      "study": {
-        "problem": "n8n workflows become black boxes the moment they need custom logic, branching or production reliability — there's no repeatable path from a no-code export to real, maintainable code.",
-        "approach": "A three-phase prompt orchestration pipeline: extract a full technical spec from the exported n8n JSON, isolate and analyze any custom node code separately, then generate a LangGraph implementation — choosing Functional API vs Graph API based on the workflow's actual complexity.",
-        "hard": "Getting an LLM to reliably choose between LangGraph's Functional and Graph APIs meant codifying the decision criteria into an explicit guide, rather than leaving it to the model's judgement call on each run.",
-        "outcome": "Proven end to end by converting a real outbound sales email campaign — lead sourcing, enrichment, personalized email generation, Gmail drafting — from n8n into a production LangGraph implementation."
-      },
-      "writeup": "#"
-    },
-    {
       "featured": true,
       "cat": "AI/ML",
       "title": "AlphaLudo",
@@ -147,6 +100,53 @@
         "https://raw.githubusercontent.com/Loadingname91/WhiteBoardAgent/010-final/placement-multistyles.gif",
         "https://raw.githubusercontent.com/Loadingname91/WhiteBoardAgent/010-final/diagrams.gif"
       ]
+    },
+    {
+      "cat": "Agents",
+      "title": "n8n → LangGraph Workflow Converter",
+      "kicker": "Agent tooling · 2025",
+      "blurb": "A three-phase prompt orchestration framework that turns exported n8n workflow JSON into production LangGraph code: requirements analysis, custom-node logic extraction, then paradigm-aware implementation generation. Proven end to end on an outbound sales email campaign.",
+      "tags": [
+        "LangGraph",
+        "n8n",
+        "Prompt orchestration",
+        "Python"
+      ],
+      "repo": "https://github.com/mentorstudents-org/n8n-to-langgraph",
+      "gif": null,
+      "featured": true,
+      "metrics": [
+        [
+          "Phases",
+          "3"
+        ],
+        [
+          "Paradigms",
+          "2"
+        ],
+        [
+          "Stars",
+          "9"
+        ],
+        [
+          "Forks",
+          "4"
+        ]
+      ],
+      "arch": [
+        "n8n JSON",
+        "Requirements spec",
+        "Custom logic extract",
+        "LangGraph codegen",
+        "Validated output"
+      ],
+      "study": {
+        "problem": "n8n workflows become black boxes the moment they need custom logic, branching or production reliability — there's no repeatable path from a no-code export to real, maintainable code.",
+        "approach": "A three-phase prompt orchestration pipeline: extract a full technical spec from the exported n8n JSON, isolate and analyze any custom node code separately, then generate a LangGraph implementation — choosing Functional API vs Graph API based on the workflow's actual complexity.",
+        "hard": "Getting an LLM to reliably choose between LangGraph's Functional and Graph APIs meant codifying the decision criteria into an explicit guide, rather than leaving it to the model's judgement call on each run.",
+        "outcome": "Proven end to end by converting a real outbound sales email campaign — lead sourcing, enrichment, personalized email generation, Gmail drafting — from n8n into a production LangGraph implementation."
+      },
+      "writeup": "#"
     },
     {
       "cat": "Distributed",
