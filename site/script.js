@@ -21,118 +21,6 @@
   }
 
   // ---------------------------------------------------------------
-  // Custom cursor
-  // ---------------------------------------------------------------
-  function initCursor() {
-    if (matchMedia('(hover: none)').matches) return;
-    const dot = document.getElementById('curd'), ring = document.getElementById('curr');
-    if (!dot || !ring) return;
-    let x = innerWidth / 2, y = innerHeight / 2, rx = x, ry = y, shown = false;
-    const HOT = 'a,button,.btn,.exp-row,.cell,img,.wr,.chip,.fcard,.scard';
-    addEventListener('mousemove', e => {
-      x = e.clientX; y = e.clientY;
-      if (!shown) { shown = true; dot.classList.add('on'); ring.classList.add('on'); }
-      ring.classList.toggle('hot', !!(e.target.closest && e.target.closest(HOT)));
-    }, { passive: true });
-    addEventListener('mouseout', e => {
-      if (!e.relatedTarget) { shown = false; dot.classList.remove('on'); ring.classList.remove('on'); }
-    });
-    const tick = () => {
-      requestAnimationFrame(tick);
-      rx += (x - rx) * 0.16; ry += (y - ry) * 0.16;
-      dot.style.transform = 'translate(' + x + 'px,' + y + 'px)';
-      ring.style.transform = 'translate(' + rx + 'px,' + ry + 'px)';
-    };
-    requestAnimationFrame(tick);
-  }
-
-  // ---------------------------------------------------------------
-  // WebGL "slow drift" ambient background
-  // ---------------------------------------------------------------
-  function initGL() {
-    const calm = matchMedia('(prefers-reduced-motion: reduce)').matches ? 0.35 : 1;
-    const cv = document.getElementById('bgfx');
-    const gl = cv && cv.getContext('webgl2', { antialias: false, alpha: false, preserveDrawingBuffer: true });
-    if (!gl) return;
-
-    const FS = [
-      '#version 300 es',
-      'precision highp float;',
-      'out vec4 fragColor;',
-      'uniform vec2 uRes; uniform float uT; uniform vec2 uM; uniform float uS; uniform float uAmt;',
-      'float hash(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}',
-      'float noise(vec2 p){vec2 i=floor(p),f=fract(p);vec2 u=f*f*(3.0-2.0*f);',
-      ' return mix(mix(hash(i),hash(i+vec2(1,0)),u.x),mix(hash(i+vec2(0,1)),hash(i+vec2(1,1)),u.x),u.y);}',
-      'float fbm(vec2 p){float a=0.5,s=0.0;for(int i=0;i<4;i++){s+=a*noise(p);p*=2.03;a*=0.5;}return s;}',
-      'void main(){',
-      ' vec2 uv=(gl_FragCoord.xy-0.5*uRes)/uRes.y;',
-      ' vec3 base=vec3(0.098,0.094,0.090);',
-      ' vec3 deep=vec3(0.235,0.121,0.086);',
-      ' vec3 warm=vec3(0.851,0.467,0.341);',
-      ' vec2 m=(uM-0.5)*0.12;',
-      ' float t=uT*0.012;',
-      ' vec2 q=vec2(fbm(uv*1.1+vec2(t,uS*0.25)),fbm(uv*1.1+vec2(4.2,1.7)-t));',
-      ' float f=fbm(uv*1.3+2.0*q+m);',
-      ' vec3 col=base;',
-      ' col=mix(col,deep,smoothstep(0.42,0.98,f)*0.75);',
-      ' col+=warm*pow(smoothstep(0.66,1.08,f),3.0)*0.10;',
-      ' col=mix(base,col,uAmt);',
-      ' col*=1.0-0.32*length(uv*vec2(0.5,0.9));',
-      ' col+=(hash(gl_FragCoord.xy+uT)-0.5)*0.010;',
-      ' fragColor=vec4(col,1.0);',
-      '}'
-    ].join('\n');
-    const VS = [
-      '#version 300 es',
-      'void main(){vec2 p=vec2((gl_VertexID<<1)&2,gl_VertexID&2);gl_Position=vec4(p*2.0-1.0,0.0,1.0);}'
-    ].join('\n');
-
-    const sh = (type, src) => { const s = gl.createShader(type); gl.shaderSource(s, src); gl.compileShader(s); return s; };
-    const prog = gl.createProgram();
-    gl.attachShader(prog, sh(gl.VERTEX_SHADER, VS));
-    gl.attachShader(prog, sh(gl.FRAGMENT_SHADER, FS));
-    gl.linkProgram(prog);
-    if (!gl.getProgramParameter(prog, gl.LINK_STATUS)) return;
-    gl.useProgram(prog);
-
-    const uRes = gl.getUniformLocation(prog, 'uRes'),
-          uT = gl.getUniformLocation(prog, 'uT'),
-          uM = gl.getUniformLocation(prog, 'uM'),
-          uS = gl.getUniformLocation(prog, 'uS'),
-          uAmt = gl.getUniformLocation(prog, 'uAmt');
-
-    const dpr = Math.min(devicePixelRatio || 1, 1.5);
-    const resize = () => {
-      cv.width = Math.floor(innerWidth * dpr);
-      cv.height = Math.floor(innerHeight * dpr);
-      gl.viewport(0, 0, cv.width, cv.height);
-    };
-    resize();
-    addEventListener('resize', resize);
-
-    let mxT = 0.5, myT = 0.5, mx = 0.5, my = 0.5, scT = 0, sc = 0;
-    addEventListener('mousemove', e => { mxT = e.clientX / innerWidth; myT = 1 - e.clientY / innerHeight; }, { passive: true });
-    addEventListener('scroll', () => {
-      const h = document.documentElement.scrollHeight - innerHeight;
-      scT = h > 0 ? scrollY / h : 0;
-    }, { passive: true });
-
-    const t0 = performance.now();
-    const loop = now => {
-      requestAnimationFrame(loop);
-      mx += (mxT - mx) * 0.045; my += (myT - my) * 0.045; sc += (scT - sc) * 0.08;
-      gl.uniform2f(uRes, cv.width, cv.height);
-      gl.uniform1f(uT, ((now - t0) / 1000) * calm);
-      gl.uniform2f(uM, mx, my);
-      gl.uniform1f(uS, sc);
-      gl.uniform1f(uAmt, 0.55);
-      gl.drawArrays(gl.TRIANGLES, 0, 3);
-    };
-    requestAnimationFrame(loop);
-    requestAnimationFrame(() => cv.classList.add('on'));
-  }
-
-  // ---------------------------------------------------------------
   // Scroll-reveal for .rv elements
   // ---------------------------------------------------------------
   function initReveal() {
@@ -186,11 +74,12 @@
   function featuredCardHtml(p, idx) {
     const gifs = Array.isArray(p.gifs) && p.gifs.length ? p.gifs : (p.gif ? [p.gif] : []);
     const gifLayers = gifs.map((g, i) => `<div class="gif${i === 0 ? ' active' : ''}" style="background-image:url(${esc(g)})"></div>`).join('');
-    const gifDots = gifs.length > 1 ? `
-      <div class="gif-dots">
-        ${gifs.map((_, i) => `<button type="button" class="gif-dot${i === 0 ? ' active' : ''}" data-gif-i="${i}" aria-label="Demo clip ${i + 1}"></button>`).join('')}
+    const gifTabs = gifs.length > 1 ? `
+      <div class="gif-tabs">
+        ${gifs.map((_, i) => `<button type="button" class="gif-tab${i === 0 ? ' active' : ''}" data-gif-i="${i}" aria-label="Demo clip ${i + 1}">${i + 1}</button>`).join('')}
       </div>` : '';
-    const gifNote = gifs.length > 1 ? 'Hover for the demo · click a dot to switch clips' : gifs.length === 1 ? 'Hover for the demo' : 'Add a demo GIF in projects.json to replace this diagram';
+    const gifNote = gifs.length > 1 ? 'Tap or hover for the demo' : gifs.length === 1 ? 'Tap or hover for the demo' : 'Architecture overview';
+    const mediaMinHeight = gifs.length ? 320 : 200;
     const study = p.study || { problem: '', approach: '', hard: '', outcome: '' };
     return `
     <article class="fcard rv" data-title="${esc(p.title)}">
@@ -201,14 +90,13 @@
           <p style="margin:0;font-size:14.5px;line-height:1.55;color:var(--color-neutral-800);text-wrap:pretty">${esc(p.blurb)}</p>
           <div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:2px">${tagsHtml(p.tags, 'tag-outline')}</div>
           <div style="display:flex;gap:16px;align-items:center;margin-top:auto;padding-top:16px;font-size:13px">
-            <button type="button" class="mono toggle-case" data-idx="${idx}" style="font-family:ui-monospace,Menlo,monospace;font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;padding:8px 14px;cursor:pointer;background:var(--color-accent);color:#191817;border:0">Case study ↓</button>
+            <button type="button" class="mono toggle-case" data-idx="${idx}" style="font-family:ui-monospace,Menlo,monospace;font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;padding:8px 14px;cursor:pointer;background:var(--color-accent);color:var(--color-on-accent);border:0">Case study ↓</button>
             <a href="${esc(p.repo || '#')}" class="mono" style="font-weight:600" target="_blank" rel="noopener">Repository ↗</a>
-            <a href="${esc(p.writeup || p.repo || '#')}" class="mono" style="font-weight:600" target="_blank" rel="noopener">Write-up ↗</a>
           </div>
         </div>
         <div class="feat-media" style="border-left:2px solid var(--color-divider);display:flex;flex-direction:column">
-          <div class="media" style="flex:1;min-height:200px;padding:20px;background:var(--color-bg);display:flex;flex-direction:column;justify-content:center;gap:12px;position:relative;overflow:hidden">
-            ${gifLayers}${gifDots}
+          <div class="media${gifs.length ? ' has-gif' : ''}" style="flex:1;min-height:${mediaMinHeight}px;padding:20px;background:var(--color-bg);display:flex;flex-direction:column;justify-content:center;gap:12px;position:relative;overflow:hidden">
+            ${gifLayers}${gifTabs}
             <div class="mono" style="font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--color-neutral-600)">Pipeline</div>
             <div class="archbox">${archHtml(p.arch)}</div>
             <div class="mono" style="font-size:10px;color:var(--color-neutral-600);margin-top:4px">${esc(gifNote)}</div>
@@ -273,7 +161,7 @@
       btn.type = 'button';
       btn.style.border = '1px solid ' + (active ? 'var(--color-accent)' : 'var(--color-divider)');
       btn.style.background = active ? 'var(--color-accent)' : 'transparent';
-      btn.style.color = active ? '#191817' : 'var(--color-neutral-800)';
+      btn.style.color = active ? 'var(--color-on-accent)' : 'var(--color-neutral-800)';
       btn.innerHTML = `${esc(c)} <span style="opacity:.6">${counts[c]}</span>`;
       btn.addEventListener('click', () => {
         state.filter = c;
@@ -299,15 +187,19 @@
         btn.textContent = isOpen ? 'Close case study ↑' : 'Case study ↓';
       });
     });
-    featEl.querySelectorAll('.gif-dot').forEach(btn => {
+    featEl.querySelectorAll('.gif-tab').forEach(btn => {
       btn.addEventListener('click', e => {
         e.preventDefault();
         e.stopPropagation();
         const media = btn.closest('.media');
         const i = btn.dataset.gifI;
         media.querySelectorAll('.gif').forEach((g, gi) => g.classList.toggle('active', String(gi) === i));
-        media.querySelectorAll('.gif-dot').forEach(d => d.classList.toggle('active', d === btn));
+        media.querySelectorAll('.gif-tab').forEach(d => d.classList.toggle('active', d === btn));
+        media.classList.add('touched');
       });
+    });
+    featEl.querySelectorAll('.media.has-gif').forEach(media => {
+      media.addEventListener('click', () => media.classList.toggle('touched'));
     });
 
     const restEl = document.getElementById('work-rest');
@@ -315,7 +207,7 @@
 
     const noteEl = document.getElementById('work-filter-note');
     noteEl.textContent = state.filter === 'All'
-      ? state.projects.length + ' projects. Add another by appending to data/projects.json.'
+      ? state.projects.length + ' selected projects'
       : (featured.length + rest.length) + ' of ' + state.projects.length + ' projects match ' + state.filter + '.';
 
     observeNewReveals(io);
@@ -396,12 +288,50 @@
   }
 
   // ---------------------------------------------------------------
+  // Theme toggle
+  // ---------------------------------------------------------------
+  function initTheme() {
+    const btn = document.getElementById('theme-toggle');
+    if (!btn) return;
+    const sync = () => {
+      const dark = document.documentElement.getAttribute('data-theme') === 'dark';
+      btn.textContent = dark ? '☀' : '☾';
+      btn.setAttribute('aria-label', dark ? 'Switch to light theme' : 'Switch to dark theme');
+    };
+    sync();
+    btn.addEventListener('click', () => {
+      const dark = document.documentElement.getAttribute('data-theme') === 'dark';
+      if (dark) {
+        document.documentElement.removeAttribute('data-theme');
+        localStorage.setItem('theme', 'light');
+      } else {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        localStorage.setItem('theme', 'dark');
+      }
+      sync();
+    });
+  }
+
+  // ---------------------------------------------------------------
+  // Experience "Details" toggles (mobile only, collapsed by default)
+  // ---------------------------------------------------------------
+  function initExpToggles() {
+    document.querySelectorAll('.exp-toggle').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const bul = btn.nextElementSibling;
+        const isOpen = bul.classList.toggle('open');
+        btn.textContent = isOpen ? 'Hide details ↑' : 'Details ↓';
+      });
+    });
+  }
+
+  // ---------------------------------------------------------------
   // Boot
   // ---------------------------------------------------------------
   document.addEventListener('DOMContentLoaded', () => {
+    initTheme();
     initProgress();
-    initCursor();
-    initGL();
+    initExpToggles();
     const io = initReveal();
 
     fetch(DATA_URL)
@@ -414,7 +344,8 @@
         loadActivity(d.github || FALLBACK_GITHUB_USER);
       })
       .catch(err => {
-        document.getElementById('work-filter-note').textContent = 'Could not load data/projects.json: ' + err;
+        console.error('Failed to load project data:', err);
+        document.getElementById('work-filter-note').textContent = 'Could not load projects right now — please refresh.';
       });
   });
 })();

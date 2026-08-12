@@ -3,6 +3,56 @@
   "github": "Loadingname91",
   "projects": [
     {
+      "cat": "Agents",
+      "title": "WhiteBoardAgent",
+      "kicker": "Canvas agents · 2026",
+      "blurb": "A layout-aware agent for tldraw whiteboards: selected shapes route through an LLM/VLM reasoning backend and return as collision-free, script-aware text, wrapped and positioned to match the canvas's existing spatial structure.",
+      "tags": [
+        "React",
+        "tldraw",
+        "FastAPI",
+        "LLM/VLM"
+      ],
+      "repo": "https://dub.sh/RwA1nqi",
+      "featured": true,
+      "metrics": [
+        [
+          "Scripts",
+          "4"
+        ],
+        [
+          "Layout signals",
+          "2"
+        ],
+        [
+          "Reasoning",
+          "streamed"
+        ],
+        [
+          "Agent tools",
+          "5"
+        ]
+      ],
+      "arch": [
+        "Selection capture",
+        "Spatial payload",
+        "LLM/VLM reasoning",
+        "Hybrid layout engine",
+        "Canvas render"
+      ],
+      "study": {
+        "problem": "Pasting AI output onto a whiteboard breaks the moment it lands: text overlaps existing shapes and ignores the columns or mind-map structure the user already built, with no regard for script direction.",
+        "approach": "A React + tldraw frontend captures the spatial bounding boxes of the user's selection and sends them with a rasterized image to a FastAPI reasoning backend. A hybrid layout engine blends geometric analysis (projection profiling, column detection) with VLM-provided semantic hints to compute a collision-free bounding box and script-aware line wrapping.",
+        "hard": "Layout couldn't be purely geometric or purely model-guessed — geometry alone missed semantic structure like mind-map branches, and VLM placement alone collided with existing shapes. Blending both signals into one layout engine was what actually worked.",
+        "outcome": "Generated text returns to the canvas positioned and wrapped to match the user's existing visual structure, across multiple scripts (English, Hindi, Spanish, French), instead of landing as a disconnected block."
+      },
+      "gifs": [
+        "https://raw.githubusercontent.com/Loadingname91/WhiteBoardAgent/010-final/tool-multilingual.gif",
+        "https://raw.githubusercontent.com/Loadingname91/WhiteBoardAgent/010-final/placement-multistyles.gif",
+        "https://raw.githubusercontent.com/Loadingname91/WhiteBoardAgent/010-final/diagrams.gif"
+      ]
+    },
+    {
       "featured": true,
       "cat": "AI/ML",
       "title": "AlphaLudo",
@@ -47,59 +97,7 @@
         "outcome": "61% win rate in 4-player competitive play, 2.4× a random baseline, across 40,000+ training episodes, with progressive win-rate targets met at every curriculum level."
       },
       "repo": "https://dub.sh/y7SZqyM",
-      "writeup": "#",
       "gif": "https://raw.githubusercontent.com/Loadingname91/RLagentLudo/main/assets/demo_gameplay.gif"
-    },
-    {
-      "cat": "Agents",
-      "title": "WhiteBoardAgent",
-      "kicker": "Canvas agents · 2026",
-      "blurb": "A layout-aware agent for tldraw whiteboards: selected shapes route through an LLM/VLM reasoning backend and return as collision-free, script-aware text, wrapped and positioned to match the canvas's existing spatial structure.",
-      "tags": [
-        "React",
-        "tldraw",
-        "FastAPI",
-        "LLM/VLM"
-      ],
-      "repo": "https://dub.sh/RwA1nqi",
-      "featured": true,
-      "metrics": [
-        [
-          "Scripts",
-          "4"
-        ],
-        [
-          "Layout signals",
-          "2"
-        ],
-        [
-          "Reasoning",
-          "streamed"
-        ],
-        [
-          "Agent tools",
-          "5"
-        ]
-      ],
-      "arch": [
-        "Selection capture",
-        "Spatial payload",
-        "LLM/VLM reasoning",
-        "Hybrid layout engine",
-        "Canvas render"
-      ],
-      "study": {
-        "problem": "Pasting AI output onto a whiteboard breaks the moment it lands: text overlaps existing shapes and ignores the columns or mind-map structure the user already built, with no regard for script direction.",
-        "approach": "A React + tldraw frontend captures the spatial bounding boxes of the user's selection and sends them with a rasterized image to a FastAPI reasoning backend. A hybrid layout engine blends geometric analysis (projection profiling, column detection) with VLM-provided semantic hints to compute a collision-free bounding box and script-aware line wrapping.",
-        "hard": "Layout couldn't be purely geometric or purely model-guessed — geometry alone missed semantic structure like mind-map branches, and VLM placement alone collided with existing shapes. Blending both signals into one layout engine was what actually worked.",
-        "outcome": "Generated text returns to the canvas positioned and wrapped to match the user's existing visual structure, across multiple scripts (English, Hindi, Spanish, French), instead of landing as a disconnected block."
-      },
-      "writeup": "#",
-      "gifs": [
-        "https://raw.githubusercontent.com/Loadingname91/WhiteBoardAgent/010-final/tool-multilingual.gif",
-        "https://raw.githubusercontent.com/Loadingname91/WhiteBoardAgent/010-final/placement-multistyles.gif",
-        "https://raw.githubusercontent.com/Loadingname91/WhiteBoardAgent/010-final/diagrams.gif"
-      ]
     },
     {
       "cat": "Agents",
@@ -145,8 +143,7 @@
         "approach": "A three-phase prompt orchestration pipeline: extract a full technical spec from the exported n8n JSON, isolate and analyze any custom node code separately, then generate a LangGraph implementation — choosing Functional API vs Graph API based on the workflow's actual complexity.",
         "hard": "Getting an LLM to reliably choose between LangGraph's Functional and Graph APIs meant codifying the decision criteria into an explicit guide, rather than leaving it to the model's judgement call on each run.",
         "outcome": "Proven end to end by converting a real outbound sales email campaign — lead sourcing, enrichment, personalized email generation, Gmail drafting — from n8n into a production LangGraph implementation."
-      },
-      "writeup": "#"
+      }
     },
     {
       "cat": "Distributed",
@@ -192,7 +189,6 @@
         "outcome": "Near-linear scaling across 1 to 4 CHPC worker nodes at target DSC above 0.85, benchmarked on end-to-end time and subjects-per-hour against the legacy pipeline."
       },
       "repo": "https://dub.sh/IyQiAlp",
-      "writeup": "#",
       "gif": null
     },
     {
@@ -238,7 +234,6 @@
         "outcome": "Higher precision on multi-part analytical questions, with citations attached to every claim and a measurable drop in unsupported answers."
       },
       "repo": "https://github.com/Loadingname91/RAGSECFillings",
-      "writeup": "#",
       "gif": null
     },
     {
@@ -266,7 +261,6 @@
         "Scraping"
       ],
       "repo": "https://github.com/mentorstudents-org/tax-sensitization-assistant",
-      "writeup": "#",
       "gif": null
     },
     {
@@ -279,7 +273,6 @@
         "LLM"
       ],
       "repo": "https://github.com/Loadingname91/N8N-OutboundSales-workflow",
-      "writeup": "#",
       "gif": null
     },
     {
@@ -340,21 +333,28 @@
       "venue": "Towards AI / Medium",
       "date": "Dec 2025",
       "blurb": "Custom Gymnasium env, a 46-float egocentric observation space, PBRS against reward farming, and a hybrid T-REX architecture over a 6-level curriculum.",
-      "url": "#"
+      "url": "https://medium.com/towards-artificial-intelligence/how-to-train-ai-to-play-multi-agent-ludo-a-guide-to-t-rex-and-reward-shaping-with-deep-q-network-4eab00c63c0f"
     },
     {
       "title": "Building an AI-Powered Tax Sensitization System",
       "venue": "MAdAiLab",
       "date": "2025",
       "blurb": "An LLM-driven FastAPI system that scrapes government tax portals, parses regulatory text and raises compliance alerts in real time.",
-      "url": "#"
+      "url": "https://hiringnet.com/building-an-ai-powered-tax-sensitization-system-automating-compliance-with-ai-and-fastapi"
     },
     {
       "title": "From No-Code to LangGraph Agent: Automating Outbound Sales",
       "venue": "MAdAiLab",
       "date": "2025",
       "blurb": "Moving a rigid no-code automation to a code-driven agent that does lead discovery, qualification and multi-turn outreach on its own.",
-      "url": "#"
+      "url": "https://hiringnet.com/from-no-code-to-langgraph-agent-automating-outbound-sales"
+    },
+    {
+      "title": "Analyzing Multilingual LLMs Using Pre-Trained Dataset Model",
+      "venue": "IJRPR",
+      "date": "2023",
+      "blurb": "Benchmarked multilingual LLMs (mBERT, XLM-R, GPT) across cross-lingual transfer, sentiment analysis and text generation, evaluated using BLEU, ROUGE, F1 and perplexity across diverse language families.",
+      "url": "https://ijrpr.com/uploads/V4ISSUE11/IJRPR19015.pdf"
     }
   ]
 }
