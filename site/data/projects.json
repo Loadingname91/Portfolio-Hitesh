@@ -1,0 +1,360 @@
+{
+  "_howto": "Add a project: copy an object in `projects` and edit it. featured:true promotes it to a large case-study card (keep 3). cat sets which filter chip it answers to. gif: a file path (.gif/.mp4/.png) shown on hover, or null to draw the `arch` pipeline boxes instead. `study` powers the expandable case study on featured cards.",
+  "github": "Loadingname91",
+  "projects": [
+    {
+      "cat": "Agents",
+      "title": "n8n → LangGraph Workflow Converter",
+      "kicker": "Agent tooling · 2025",
+      "blurb": "A three-phase prompt orchestration framework that turns exported n8n workflow JSON into production LangGraph code: requirements analysis, custom-node logic extraction, then paradigm-aware implementation generation. Proven end to end on an outbound sales email campaign.",
+      "tags": [
+        "LangGraph",
+        "n8n",
+        "Prompt orchestration",
+        "Python"
+      ],
+      "repo": "https://github.com/mentorstudents-org/n8n-to-langgraph",
+      "gif": null,
+      "featured": true,
+      "metrics": [
+        [
+          "Phases",
+          "3"
+        ],
+        [
+          "Paradigms",
+          "2"
+        ],
+        [
+          "Stars",
+          "9"
+        ],
+        [
+          "Forks",
+          "4"
+        ]
+      ],
+      "arch": [
+        "n8n JSON",
+        "Requirements spec",
+        "Custom logic extract",
+        "LangGraph codegen",
+        "Validated output"
+      ],
+      "study": {
+        "problem": "n8n workflows become black boxes the moment they need custom logic, branching or production reliability — there's no repeatable path from a no-code export to real, maintainable code.",
+        "approach": "A three-phase prompt orchestration pipeline: extract a full technical spec from the exported n8n JSON, isolate and analyze any custom node code separately, then generate a LangGraph implementation — choosing Functional API vs Graph API based on the workflow's actual complexity.",
+        "hard": "Getting an LLM to reliably choose between LangGraph's Functional and Graph APIs meant codifying the decision criteria into an explicit guide, rather than leaving it to the model's judgement call on each run.",
+        "outcome": "Proven end to end by converting a real outbound sales email campaign — lead sourcing, enrichment, personalized email generation, Gmail drafting — from n8n into a production LangGraph implementation."
+      },
+      "writeup": "#"
+    },
+    {
+      "featured": true,
+      "cat": "AI/ML",
+      "title": "AlphaLudo",
+      "kicker": "Reinforcement learning · 2025",
+      "blurb": "A 5-level curriculum trains a Dueling Double DQN from basic movement to full 4-player competition. Preference-based reward learning (T-REX) recovers a reward function from ranked trajectories; PBRS kills reward farming without changing the optimal policy.",
+      "tags": [
+        "PyTorch",
+        "Gymnasium",
+        "Dueling DQN",
+        "T-REX",
+        "PBRS"
+      ],
+      "metrics": [
+        [
+          "Win rate",
+          "61%"
+        ],
+        [
+          "vs random",
+          "2.4×"
+        ],
+        [
+          "Episodes",
+          "40k+"
+        ],
+        [
+          "State dim",
+          "16"
+        ]
+      ],
+      "arch": [
+        "Gym env",
+        "Curriculum L1–L5",
+        "Dueling DDQN",
+        "T-REX reward",
+        "Eval"
+      ],
+      "study": {
+        "problem": "Ludo is sparse-reward and multi-agent: an agent trained end to end on win/loss sees almost no signal for thousands of steps, and any shaped reward invites farming behaviour that never learns to win.",
+        "approach": "Built a custom Gymnasium environment with a 46-float egocentric observation, then a 5-level curriculum from single-token movement up to 4-player play. Potential-based reward shaping keeps the optimal policy intact, and a hybrid T-REX head learns reward from ranked trajectory demonstrations.",
+        "hard": "Naive shaping produced agents that circled the board collecting intermediate rewards and never finished. Fixing it meant proving the shaping term was potential-based rather than tuning coefficients by feel.",
+        "outcome": "61% win rate in 4-player competitive play, 2.4× a random baseline, across 40,000+ training episodes, with progressive win-rate targets met at every curriculum level."
+      },
+      "repo": "https://dub.sh/y7SZqyM",
+      "writeup": "#",
+      "gif": "https://raw.githubusercontent.com/Loadingname91/RLagentLudo/main/assets/demo_gameplay.gif"
+    },
+    {
+      "cat": "Agents",
+      "title": "WhiteBoardAgent",
+      "kicker": "Canvas agents · 2026",
+      "blurb": "A layout-aware agent for tldraw whiteboards: selected shapes route through an LLM/VLM reasoning backend and return as collision-free, script-aware text, wrapped and positioned to match the canvas's existing spatial structure.",
+      "tags": [
+        "React",
+        "tldraw",
+        "FastAPI",
+        "LLM/VLM"
+      ],
+      "repo": "https://dub.sh/RwA1nqi",
+      "featured": true,
+      "metrics": [
+        [
+          "Scripts",
+          "4"
+        ],
+        [
+          "Layout signals",
+          "2"
+        ],
+        [
+          "Reasoning",
+          "streamed"
+        ],
+        [
+          "Agent tools",
+          "5"
+        ]
+      ],
+      "arch": [
+        "Selection capture",
+        "Spatial payload",
+        "LLM/VLM reasoning",
+        "Hybrid layout engine",
+        "Canvas render"
+      ],
+      "study": {
+        "problem": "Pasting AI output onto a whiteboard breaks the moment it lands: text overlaps existing shapes and ignores the columns or mind-map structure the user already built, with no regard for script direction.",
+        "approach": "A React + tldraw frontend captures the spatial bounding boxes of the user's selection and sends them with a rasterized image to a FastAPI reasoning backend. A hybrid layout engine blends geometric analysis (projection profiling, column detection) with VLM-provided semantic hints to compute a collision-free bounding box and script-aware line wrapping.",
+        "hard": "Layout couldn't be purely geometric or purely model-guessed — geometry alone missed semantic structure like mind-map branches, and VLM placement alone collided with existing shapes. Blending both signals into one layout engine was what actually worked.",
+        "outcome": "Generated text returns to the canvas positioned and wrapped to match the user's existing visual structure, across multiple scripts (English, Hindi, Spanish, French), instead of landing as a disconnected block."
+      },
+      "writeup": "#",
+      "gifs": [
+        "https://raw.githubusercontent.com/Loadingname91/WhiteBoardAgent/010-final/tool-multilingual.gif",
+        "https://raw.githubusercontent.com/Loadingname91/WhiteBoardAgent/010-final/placement-multistyles.gif",
+        "https://raw.githubusercontent.com/Loadingname91/WhiteBoardAgent/010-final/diagrams.gif"
+      ]
+    },
+    {
+      "cat": "Distributed",
+      "title": "Scalable WMH Quantification",
+      "kicker": "Distributed systems · 2026",
+      "blurb": "Re-engineered the single-threaded MATLAB UBO Detector into a cloud-native Spark ETL pipeline on the Utah CHPC cluster. Parallelized Random Forest via MLlib, Dockerized HD-BET skull-stripping, and replaced sequential loops with broadcast DataFrame feature extraction.",
+      "tags": [
+        "PySpark",
+        "Spark MLlib",
+        "HD-BET",
+        "Docker",
+        "CHPC"
+      ],
+      "metrics": [
+        [
+          "Target DSC",
+          "> 0.85"
+        ],
+        [
+          "Scaling",
+          "near-linear"
+        ],
+        [
+          "Nodes",
+          "1–4"
+        ],
+        [
+          "Subjects",
+          "100k+"
+        ]
+      ],
+      "arch": [
+        "DICOM in",
+        "HD-BET (Docker)",
+        "Spark features",
+        "RF MLlib",
+        "DSC bench"
+      ],
+      "study": {
+        "problem": "White matter hyperintensity quantification ran through a single-threaded MATLAB tool with a proprietary licence. At population scale, 100k+ subjects, the runtime and the licensing were both dead ends.",
+        "approach": "Rebuilt it as a distributed Spark ETL pipeline: HD-BET skull-stripping containerized for reproducibility across nodes, PySpark DataFrame feature extraction with broadcast T1/FLAIR intensity ratios and spatial priors, and a parallelized Random Forest replacing the legacy k-NN classifier.",
+        "hard": "Diagnostic accuracy had to hold. Every optimization was validated against the MATLAB baseline on Dice Similarity Coefficient rather than throughput alone.",
+        "outcome": "Near-linear scaling across 1 to 4 CHPC worker nodes at target DSC above 0.85, benchmarked on end-to-end time and subjects-per-hour against the legacy pipeline."
+      },
+      "repo": "https://dub.sh/IyQiAlp",
+      "writeup": "#",
+      "gif": null
+    },
+    {
+      "cat": "Agents",
+      "title": "SEC Filing Research Agent",
+      "kicker": "Agentic RAG · 2025–26",
+      "blurb": "A ReAct-style agent over SEC filings: query decomposition, dense FAISS retrieval, BGE cross-encoder reranking, and SerpAPI augmentation for live web and director lookup. Chunking tuned against grounding, not vibes.",
+      "tags": [
+        "LangChain",
+        "FAISS",
+        "Cross-encoder",
+        "SerpAPI"
+      ],
+      "metrics": [
+        [
+          "Retrieval",
+          "hybrid"
+        ],
+        [
+          "Rerank",
+          "BGE"
+        ],
+        [
+          "Hops",
+          "multi-part"
+        ],
+        [
+          "Grounding",
+          "cited"
+        ]
+      ],
+      "arch": [
+        "Decompose",
+        "FAISS dense",
+        "BGE rerank",
+        "SerpAPI",
+        "Synthesize"
+      ],
+      "study": {
+        "problem": "Analytical questions about filings are multi-part: they span sections, documents and facts that only exist outside the filing. Single-shot retrieval answers the easy half and hallucinates the rest.",
+        "approach": "A ReAct loop decomposes the query, retrieves densely over FAISS, reranks with a BGE cross-encoder, and reaches for SerpAPI when the answer needs live web or director information. Answers are synthesized only from retrieved spans.",
+        "hard": "Chunking strategy mattered more than model choice. Splitting on document structure instead of fixed windows was what actually moved grounding.",
+        "outcome": "Higher precision on multi-part analytical questions, with citations attached to every claim and a measurable drop in unsupported answers."
+      },
+      "repo": "https://github.com/Loadingname91/RAGSECFillings",
+      "writeup": "#",
+      "gif": null
+    },
+    {
+      "cat": "AI/ML",
+      "title": "Multi-task QLoRA Instruction Tuning",
+      "kicker": "Fine-tuning · 2025–26",
+      "blurb": "4-bit QLoRA adapters across emotion classification, multi-label emotion and dialogue summarization with dynamic label injection and per-task checkpoints.",
+      "tags": [
+        "PEFT",
+        "TRL",
+        "HF Hub",
+        "ROUGE"
+      ],
+      "repo": "https://github.com/Loadingname91/finetuningmodels",
+      "gif": null
+    },
+    {
+      "cat": "Full-stack",
+      "title": "AI Tax Sensitization System",
+      "kicker": "LLM product · 2025",
+      "blurb": "FastAPI service that scrapes live government tax portals, parses regulatory text and surfaces obligation alerts as legislation changes.",
+      "tags": [
+        "FastAPI",
+        "LLM",
+        "Scraping"
+      ],
+      "repo": "https://github.com/mentorstudents-org/tax-sensitization-assistant",
+      "writeup": "#",
+      "gif": null
+    },
+    {
+      "cat": "Agents",
+      "title": "Autonomous Outbound Sales Agent",
+      "kicker": "Agents · 2025",
+      "blurb": "LangGraph agent owning the full lifecycle: lead discovery, qualification, multi-turn outreach, replacing brittle no-code flows.",
+      "tags": [
+        "LangGraph",
+        "LLM"
+      ],
+      "repo": "https://github.com/Loadingname91/N8N-OutboundSales-workflow",
+      "writeup": "#",
+      "gif": null
+    },
+    {
+      "cat": "Agents",
+      "title": "Voice Dental Receptionist",
+      "kicker": "Voice agents · 2025–26",
+      "blurb": "Whisper transcription into a multi-turn LangGraph tool loop with Google Calendar/Sheets for availability, booking and audit logging.",
+      "tags": [
+        "Whisper",
+        "LangGraph",
+        "Google APIs"
+      ],
+      "repo": "https://github.com/Loadingname91/LangGraphvoiceAgent",
+      "gif": null
+    },
+    {
+      "cat": "AI/ML",
+      "title": "Time-Series Forecasting Ensemble",
+      "kicker": "Classical ML · 2025–26",
+      "blurb": "TimeSeriesSplit CV, RandomizedSearchCV tuning and a linear stack over RF + XGBoost + Prophet for equity forecasting.",
+      "tags": [
+        "XGBoost",
+        "Prophet",
+        "scikit-learn"
+      ],
+      "repo": "https://github.com/Loadingname91/DeeplearningForecastingModels",
+      "gif": null
+    },
+    {
+      "cat": "Distributed",
+      "title": "openaq-monitors-extractor",
+      "kicker": "Open source · 2026",
+      "blurb": "Automated large-scale aggregation of global PM2.5 and AOD measurements from OpenAQ, feeding satellite/ground fusion models.",
+      "tags": [
+        "Python",
+        "OpenAQ",
+        "xarray"
+      ],
+      "repo": "https://github.com/Loadingname91/openaq-monitors-extractor",
+      "gif": null
+    },
+    {
+      "cat": "Full-stack",
+      "title": "Browser Data Automation Agent",
+      "kicker": "Automation · 2025–26",
+      "blurb": "Schema-guided CLI that navigates university sites, extracts faculty records, normalizes aliases and falls back through a two-stage navigation strategy.",
+      "tags": [
+        "Firecrawl",
+        "Python"
+      ],
+      "repo": "https://github.com/Loadingname91/BrowserAutomation",
+      "gif": null
+    }
+  ],
+  "writing": [
+    {
+      "title": "How to Train AI to Play Multi-Agent Ludo: T-REX and Reward Shaping with Deep Q-Networks",
+      "venue": "Towards AI / Medium",
+      "date": "Dec 2025",
+      "blurb": "Custom Gymnasium env, a 46-float egocentric observation space, PBRS against reward farming, and a hybrid T-REX architecture over a 6-level curriculum.",
+      "url": "#"
+    },
+    {
+      "title": "Building an AI-Powered Tax Sensitization System",
+      "venue": "MAdAiLab",
+      "date": "2025",
+      "blurb": "An LLM-driven FastAPI system that scrapes government tax portals, parses regulatory text and raises compliance alerts in real time.",
+      "url": "#"
+    },
+    {
+      "title": "From No-Code to LangGraph Agent: Automating Outbound Sales",
+      "venue": "MAdAiLab",
+      "date": "2025",
+      "blurb": "Moving a rigid no-code automation to a code-driven agent that does lead discovery, qualification and multi-turn outreach on its own.",
+      "url": "#"
+    }
+  ]
+}

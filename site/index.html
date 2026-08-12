@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hitesh Kumar Balegar — Software Engineer, Applied AI</title>
+<meta name="description" content="Software engineer and MS CS (AI Track) student at the University of Utah. Five years of production engineering, now building AI systems that work in the real world.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23191817'/%3E%3Ctext x='32' y='44' font-family='Georgia,serif' font-size='40' fill='%23d97757' text-anchor='middle'%3EH%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="styles.css">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap">
+</head>
+<body>
+
+<canvas id="bgfx"></canvas>
+<div id="prog"></div>
+<div id="curr"></div>
+<div id="curd"></div>
+
+<div style="background:var(--color-accent);color:var(--color-bg)">
+  <div class="wrap announce" style="display:flex;align-items:center;gap:14px;padding-top:8px;padding-bottom:8px;font-size:12.5px">
+    <span class="mono" style="font-weight:600;letter-spacing:.12em;text-transform:uppercase">Open to work</span>
+    <span class="announce-text" style="opacity:.9">MS CS (AI Track) at Utah, graduating May 2027. Looking for AI / SWE internships and new-grad roles.</span>
+    <a class="announce-cta" href="mailto:hiteshbalegar@gmail.com" style="margin-left:auto;color:var(--color-bg);border-bottom:1px solid rgba(255,255,255,.6)">Get in touch</a>
+  </div>
+</div>
+
+<nav class="nav" style="position:sticky;top:0;z-index:20;background:var(--color-bg)">
+  <div class="wrap nav-row" style="display:flex;align-items:center;gap:26px;width:100%">
+    <span class="nav-brand" style="margin-right:auto">HITESH KUMAR BALEGAR</span>
+    <a href="#work">Work</a><a href="#activity">Activity</a><a href="#experience">Experience</a><a href="#writing">Writing</a><a href="#contact">Contact</a>
+    <a class="btn btn-primary" href="https://dub.sh/hitesh-balegar" target="_blank" rel="noopener" style="padding:7px 14px">Resume PDF ↓</a>
+  </div>
+</nav>
+
+<header class="wrap" style="padding-top:56px;padding-bottom:44px">
+  <div class="hero-grid" style="display:grid;grid-template-columns:1fr 280px;gap:48px;align-items:start">
+    <div>
+      <div class="mono hero-el" style="font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--color-accent-700);margin-bottom:20px;animation-delay:.05s">Software engineer · Applied AI · Salt Lake City</div>
+      <h1 class="hero-el" style="font-size:66px;line-height:1;letter-spacing:-.03em;margin:0 0 22px;max-width:18ch;animation-delay:.14s">Point me at anything and give me enough time.</h1>
+      <p class="hero-el" style="font-size:17px;line-height:1.55;max-width:60ch;margin:0 0 18px;text-wrap:pretty;animation-delay:.24s">I'm a versatile engineer, not a one-stack specialist. Five years of production work across backend, infrastructure and full-stack, then a master's in AI, and the pattern has always been the same: hand me an unfamiliar domain, and I'll learn it well enough to build the real thing.</p>
+      <p class="hero-el" style="font-size:15px;line-height:1.6;max-width:60ch;color:var(--color-neutral-800);margin:0 0 26px;animation-delay:.32s">Enterprise backup, healthcare telephony, atmospheric science, neuroimaging, reinforcement learning, retrieval systems. What I keep coming back to is AI applied to somewhere it hasn't been yet, and that's the part I find genuinely fun.</p>
+      <div class="hero-el" style="display:flex;gap:10px;flex-wrap:wrap;animation-delay:.4s">
+        <a class="btn btn-primary" href="#work" style="padding:11px 18px">See what I've built →</a>
+        <a class="btn btn-secondary" href="https://dub.sh/github-hitesh" target="_blank" rel="noopener">GitHub</a>
+        <a class="btn btn-secondary" href="https://linkedin.com/in/hiteshbalegar" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+    </div>
+    <div class="hero-side">
+      <div class="grayscale" style="border:2px solid var(--color-divider)">
+        <img src="assets/portrait.jpg" alt="Portrait of Hitesh Kumar Balegar" style="width:100%;height:320px;object-fit:cover;display:block">
+      </div>
+      <div style="border:2px solid var(--color-divider);border-top:0;padding:12px 14px;display:flex;flex-direction:column;gap:6px;font-size:12.5px">
+        <div style="display:flex;justify-content:space-between"><span class="text-muted">MS CS, AI Track</span><span class="mono">GPA 3.8</span></div>
+        <div style="display:flex;justify-content:space-between"><span class="text-muted">Industry</span><span class="mono">5 yrs</span></div>
+        <div style="display:flex;justify-content:space-between"><span class="text-muted">Labs</span><span class="mono">Holmes · Merenstein</span></div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section class="wrap" id="tldr" style="padding-top:8px;padding-bottom:8px">
+  <div class="rv" style="border-top:2px solid var(--color-divider);border-bottom:2px solid var(--color-divider);display:grid;grid-template-columns:190px 1fr;gap:28px;padding:22px 0">
+    <div class="mono" style="font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--color-accent-700)">If you're short<br>on time</div>
+    <ul class="bul" style="gap:7px">
+      <li><b>Five years production engineering</b> at BETSOL, including a Fortune 10 healthcare client. <b>5M+ records a month at 99.9% uptime</b>, provisioning across 470+ locations.</li>
+      <li><b>MS Computer Science, AI Track</b> at Utah, GPA 3.8. Research engineer in the Holmes Lab building distributed scientific pipelines.</li>
+      <li><b>Core stack:</b> Python, Go, TypeScript. FastAPI, Django, Node, React. PostgreSQL, Kafka, SQL.</li>
+      <li><b>AI in production:</b> RAG over FAISS, Qdrant and Pinecone with RAGAS evaluation; LangGraph and LangChain agents; QLoRA fine-tuning; RL in PyTorch and Gymnasium.</li>
+      <li><b>Scale and infrastructure:</b> Apache Spark on HPC clusters, Docker, Kubernetes and AKS, Helm, Terraform, GitHub Actions, AWS and Azure.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="wrap" id="work" style="padding-top:44px;padding-bottom:20px">
+  <div class="sechd rv"><span class="n">01</span><h2>Selected work</h2><span class="r">Click a card to open the case study</span></div>
+
+  <div id="work-filters" class="rv" style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px;align-items:center">
+    <span class="mono" style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--color-neutral-600);margin-right:6px">Filter</span>
+  </div>
+
+  <div id="work-featured" style="display:flex;flex-direction:column;gap:26px"></div>
+
+  <div id="work-rest" class="rest-grid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:26px"></div>
+  <div id="work-filter-note" class="mono rv" style="margin-top:16px;font-size:11px;color:var(--color-neutral-600)"></div>
+</section>
+
+<section class="wrap" id="experience" style="padding-top:44px;padding-bottom:20px">
+  <div class="sechd rv"><span class="n">02</span><h2>Experience</h2><span class="r">Five years industry · two research labs · two TA roles</span></div>
+
+  <h6 class="rv" style="margin:0 0 14px;color:var(--color-accent-700)">Industry · BETSOL, Bangalore</h6>
+  <div style="display:flex;flex-direction:column;gap:0">
+    <div class="exp-row rv" style="display:grid;grid-template-columns:130px 6px 1fr;gap:20px;padding:22px 0;border-top:2px solid var(--color-divider)">
+      <div class="mono" style="font-size:12px;color:var(--color-neutral-700)">Aug 2020<br>Jun 2025<br><span style="color:var(--color-neutral-600)">4 yr 11 mo</span></div>
+      <div class="exp-bar" style="background:var(--color-neutral-400);transition:background .18s"></div>
+      <div>
+        <h4 style="margin:0 0 2px;font-size:21px">Full Stack Software Engineer · Zmanda Enterprise</h4>
+        <div class="mono" style="font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--color-neutral-600);margin-bottom:12px">Enterprise backup platform · Go · Python · Kubernetes</div>
+        <ul class="bul">
+          <li><b>Zero-touch provisioning across 470+ locations.</b> Go CLI tooling and Python automation packaged as AWS Lambdas, with idempotent environment-aware config pipelines. Rollout time <em>6 weeks → 48 hours</em>.</li>
+          <li><b>Monolith to microservices.</b> Re-architected a legacy backup platform into Docker services on Kubernetes with rolling updates, health probes and namespace-scoped isolation. New-environment setup <em>−70%</em>, environment drift eliminated.</li>
+          <li><b>Backend performance.</b> Profiled Django ORM queries with EXPLAIN ANALYZE, added connection pooling, query-result caching and multithreaded WSGI workers. p95 API latency <em>−60%</em> under heavy backup/restore load.</li>
+          <li><b>Security &amp; compliance.</b> FIPS-compliant encryption modules and SELinux MAC packages across the stack; HashiCorp Vault for dynamic secret injection, removing every hardcoded credential across <em>10+ TB</em> of customer data.</li>
+          <li><b>RAG support chatbot.</b> LangChain + GPT-4 over Qdrant and Pinecone, with an automated RAGAS evaluation pipeline tracking faithfulness, context precision and answer relevancy. Software quality practice applied to a generative feature.</li>
+        </ul>
+        <div style="display:flex;flex-wrap:wrap;gap:5px;margin-top:14px"><span class="tag tag-neutral">Go</span><span class="tag tag-neutral">Python / Django</span><span class="tag tag-neutral">Kubernetes</span><span class="tag tag-neutral">AWS Lambda</span><span class="tag tag-neutral">Vault</span><span class="tag tag-neutral">LangChain</span><span class="tag tag-neutral">Qdrant</span><span class="tag tag-neutral">RAGAS</span></div>
+      </div>
+    </div>
+
+    <div class="exp-row rv" style="display:grid;grid-template-columns:130px 6px 1fr;gap:20px;padding:22px 0;border-top:1px solid var(--color-divider)">
+      <div class="mono" style="font-size:12px;color:var(--color-neutral-700)">Sep 2020<br>Jun 2025<br><span style="color:var(--color-neutral-600)">client engagement</span></div>
+      <div class="exp-bar" style="background:var(--color-neutral-400);transition:background .18s"></div>
+      <div>
+        <h4 style="margin:0 0 2px;font-size:21px">Full Stack Software Engineer · CVS Health &amp; Aetna</h4>
+        <div class="mono" style="font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--color-neutral-600);margin-bottom:12px">Fortune 10 healthcare · telephony analytics · HIPAA</div>
+        <ul class="bul">
+          <li><b>Telephony analytics portal at scale.</b> FastAPI + React on Azure Kubernetes Service processing <em>5M+ call records a month</em> at <em>99.9% uptime</em>, with RBAC, field-level encryption and structured audit logging on every data path.</li>
+          <li><b>Cross-system integration.</b> RESTful layers spanning ServiceNow, telecom provider APIs and internal warehouses, feeding real-time reporting used daily by <em>50+ analysts</em> and leadership.</li>
+          <li><b>Call-routing re-platform.</b> Led the move of legacy routing logic into Node.js/Express microservices with circuit breakers, structured logging and OpenAPI contracts. Higher throughput, measurably fewer on-call incidents.</li>
+          <li><b>Forecasting for the contact center.</b> Custom Erlang B extended traffic models and ML demand pipelines surfaced in Power BI and ServiceNow. Forecast accuracy <em>+25%</em>, staffing allocation <em>+20%</em>, fewer SLA breaches.</li>
+          <li><b>Release engineering.</b> Helm chart versioning, Jenkins multi-branch pipelines and GitHub Actions with smoke tests and rollback triggers. Release cycles <em>−40%</em>, deployment setup from a full day to <em>under 2 hours</em>.</li>
+        </ul>
+        <div style="display:flex;flex-wrap:wrap;gap:5px;margin-top:14px"><span class="tag tag-neutral">FastAPI</span><span class="tag tag-neutral">React</span><span class="tag tag-neutral">Azure AKS</span><span class="tag tag-neutral">Node.js</span><span class="tag tag-neutral">Helm</span><span class="tag tag-neutral">Jenkins</span><span class="tag tag-neutral">Power BI</span></div>
+      </div>
+    </div>
+  </div>
+
+  <h6 class="rv" style="margin:34px 0 14px;color:var(--color-accent-700)">Research &amp; teaching · University of Utah</h6>
+  <div style="display:flex;flex-direction:column">
+    <div class="exp-row rv" style="display:grid;grid-template-columns:130px 6px 1fr;gap:20px;padding:22px 0;border-top:2px solid var(--color-divider)">
+      <div class="mono" style="font-size:12px;color:var(--color-neutral-700)">Jan 2026<br>present</div>
+      <div class="exp-bar" style="background:var(--color-accent);transition:background .18s"></div>
+      <div>
+        <h4 style="margin:0 0 10px;font-size:20px">Research Engineer &amp; Graduate Mentor · Holmes Lab</h4>
+        <ul class="bul">
+          <li><b>Biomass burning in Nepal.</b> Compared FINN, GFED and QFED inventories and fused MODIS polar-orbiting with GEO-KOMPSAT-2A geostationary FRP into an hourly emissions framework feeding HYSPLIT dispersion.</li>
+          <li><b>Dust exposure along the Wasatch Front.</b> Integrated air-quality observations, source apportionment, satellite retrievals and population estimates into exposure figures delivered to epidemiologists at UNR.</li>
+          <li><b>Pipelines &amp; mentoring.</b> Co-built <span class="mono">openaq-monitors-extractor</span> for global PM2.5/AOD aggregation; mentoring HAPPIEST undergraduates on ML workflows and scientific computing.</li>
+        </ul>
+        <div style="display:flex;flex-wrap:wrap;gap:5px;margin-top:14px"><span class="tag tag-neutral">xarray</span><span class="tag tag-neutral">GeoPandas</span><span class="tag tag-neutral">NetCDF</span><span class="tag tag-neutral">XGBoost</span></div>
+      </div>
+    </div>
+    <div class="exp-row rv" style="display:grid;grid-template-columns:130px 6px 1fr;gap:20px;padding:22px 0;border-top:1px solid var(--color-divider)">
+      <div class="mono" style="font-size:12px;color:var(--color-neutral-700)">Jan 2026<br>present</div>
+      <div class="exp-bar" style="background:var(--color-accent);transition:background .18s"></div>
+      <div>
+        <h4 style="margin:0 0 10px;font-size:20px">Teaching Assistant · CS 6017 Data Analytics &amp; AI for Business</h4>
+        <ul class="bul">
+          <li>Supporting a graduate course on supervised learning, clustering, regression and visual representation, helping students build analytical pipelines and dashboards end to end.</li>
+          <li>Built course-ready applied-AI demos for the business school: a LangGraph voice agent, an SEC-filing RAG research agent, browser automation utilities and fine-tuned LLMs.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="exp-row rv" style="display:grid;grid-template-columns:130px 6px 1fr;gap:20px;padding:22px 0;border-top:1px solid var(--color-divider);border-bottom:1px solid var(--color-divider)">
+      <div class="mono" style="font-size:12px;color:var(--color-neutral-700)">Jan 2026<br>May 2026</div>
+      <div class="exp-bar" style="background:var(--color-neutral-400);transition:background .18s"></div>
+      <div>
+        <h4 style="margin:0 0 10px;font-size:20px">Research Assistant · Merenstein Lab</h4>
+        <ul class="bul">
+          <li>Extraction and fusion pipelines over OpenAQ, EPA, PurpleAir, MODIS and VIIRS supporting air-pollution forecasting and demographic analysis.</li>
+          <li>Neuroimaging processing and analysis pipelines for cognitive neuroscience across large, heterogeneous datasets.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="wrap" style="padding-top:44px;padding-bottom:20px">
+  <div class="sechd rv"><span class="n">03</span><h2>Stack</h2><span class="r">Things I've actually shipped with</span></div>
+  <div class="stack-grid" style="display:grid;grid-template-columns:repeat(4,1fr);border:2px solid var(--color-divider)">
+    <div style="padding:18px 20px;border-right:1px solid var(--color-divider)">
+      <h6 style="margin:0 0 10px;color:var(--color-accent-700)">Languages</h6>
+      <div style="display:flex;flex-wrap:wrap;gap:5px"><span class="tag tag-neutral">Python</span><span class="tag tag-neutral">Go</span><span class="tag tag-neutral">TypeScript</span><span class="tag tag-neutral">SQL</span><span class="tag tag-neutral">Java</span><span class="tag tag-neutral">C#</span></div>
+    </div>
+    <div style="padding:18px 20px;border-right:1px solid var(--color-divider)">
+      <h6 style="margin:0 0 10px;color:var(--color-accent-700)">ML &amp; AI</h6>
+      <div style="display:flex;flex-wrap:wrap;gap:5px"><span class="tag tag-neutral">PyTorch</span><span class="tag tag-neutral">Transformers</span><span class="tag tag-neutral">PEFT / QLoRA</span><span class="tag tag-neutral">LangGraph</span><span class="tag tag-neutral">LlamaIndex</span><span class="tag tag-neutral">RAGAS</span><span class="tag tag-neutral">FAISS</span><span class="tag tag-neutral">Qdrant</span><span class="tag tag-neutral">Gymnasium</span></div>
+    </div>
+    <div style="padding:18px 20px;border-right:1px solid var(--color-divider)">
+      <h6 style="margin:0 0 10px;color:var(--color-accent-700)">Data &amp; distributed</h6>
+      <div style="display:flex;flex-wrap:wrap;gap:5px"><span class="tag tag-neutral">Apache Spark</span><span class="tag tag-neutral">Spark MLlib</span><span class="tag tag-neutral">Kafka</span><span class="tag tag-neutral">PostgreSQL</span><span class="tag tag-neutral">CHPC / HPC</span><span class="tag tag-neutral">xarray</span></div>
+    </div>
+    <div style="padding:18px 20px">
+      <h6 style="margin:0 0 10px;color:var(--color-accent-700)">Platform &amp; DevOps</h6>
+      <div style="display:flex;flex-wrap:wrap;gap:5px"><span class="tag tag-neutral">Docker</span><span class="tag tag-neutral">Kubernetes</span><span class="tag tag-neutral">Helm</span><span class="tag tag-neutral">GitHub Actions</span><span class="tag tag-neutral">Terraform</span><span class="tag tag-neutral">AWS</span><span class="tag tag-neutral">Azure AKS</span><span class="tag tag-neutral">Next.js</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="wrap" id="writing" style="padding-top:44px;padding-bottom:20px">
+  <div class="sechd rv"><span class="n">04</span><h2>Writing &amp; publication</h2><span class="r">Add an article to <span class="mono">data/projects.json</span></span></div>
+  <div style="display:flex;flex-direction:column;border-top:2px solid var(--color-divider)">
+    <div id="writing-list"></div>
+    <div class="writing-row" style="display:grid;grid-template-columns:150px 1fr 90px;gap:20px;padding:18px 14px;border-bottom:1px solid var(--color-divider);background:var(--color-surface)">
+      <div class="mono wr-meta" style="font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--color-accent-700)">IJRPR<br><span style="color:var(--color-neutral-600)">2023</span></div>
+      <div>
+        <h4 style="margin:0 0 5px;font-size:17px;letter-spacing:-.01em">Analyzing Multilingual LLMs Using Pre-Trained Dataset Model</h4>
+        <p style="margin:0;font-size:13.5px;line-height:1.5;color:var(--color-neutral-800);max-width:74ch;text-wrap:pretty">Benchmarked mBERT, XLM-R and GPT across cross-lingual transfer, sentiment analysis and generation using BLEU, ROUGE, F1 and perplexity over diverse language families. Vol. 4, No. 11, pp. 97–105.</p>
+      </div>
+      <div class="mono wr-cta" style="font-size:12px;text-align:right;color:var(--color-accent-700)">Paper ↗</div>
+    </div>
+  </div>
+</section>
+
+<section class="wrap" style="padding-top:44px;padding-bottom:52px">
+  <div class="sechd rv"><span class="n">05</span><h2>Recognition &amp; education</h2></div>
+  <div class="edu-grid" style="display:grid;grid-template-columns:1.4fr 1fr;gap:32px">
+    <div>
+      <h6 style="margin:0 0 12px;color:var(--color-accent-700)">Awards</h6>
+      <table class="table">
+        <tbody>
+          <tr><td class="mono" style="width:60px;font-size:12px;color:var(--color-neutral-700)">2026</td><td><strong>1st place</strong> · Game Day Analytics Challenge <span class="text-muted">· 120+ students, 59 brands</span></td></tr>
+          <tr><td class="mono" style="font-size:12px;color:var(--color-neutral-700)">2026</td><td><strong>Honorable mention</strong> · Generative AI Hackathon <span class="text-muted">· "Most deployable, tech-driven solution", 35+ teams</span></td></tr>
+          <tr><td class="mono" style="font-size:12px;color:var(--color-neutral-700)">2025</td><td><strong>1st place</strong> · Salesforce IDEAthon <span class="text-muted">· recruiting CRM for Utah Athletics</span></td></tr>
+          <tr><td class="mono" style="font-size:12px;color:var(--color-neutral-700)">21–24</td><td><strong>Team Excellence, Above &amp; Beyond, Bug Bounty</strong> · BETSOL</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div>
+      <h6 style="margin:0 0 12px;color:var(--color-accent-700)">Education</h6>
+      <div style="border:2px solid var(--color-divider);padding:16px 18px;margin-bottom:12px">
+        <div style="display:flex;justify-content:space-between;align-items:baseline"><h4 style="margin:0 0 2px;font-size:17px">University of Utah</h4><span class="mono" style="font-size:11px;color:var(--color-neutral-700)">2025–27</span></div>
+        <div style="font-size:13.5px;color:var(--color-neutral-800)">MS Computer Science, AI Track · GPA 3.8</div>
+        <div class="mono" style="font-size:11px;color:var(--color-neutral-600);margin-top:6px">Multimodal LLMs · Advanced AI · Managing Data for ML</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="wrap" id="activity" style="padding-top:44px;padding-bottom:20px">
+  <div class="sechd rv"><span class="n">06</span><h2>Commit activity</h2><span class="r"><span id="activity-total">—</span> contributions · last 12 months</span></div>
+  <div style="border:2px solid var(--color-divider);padding:22px 24px;background:var(--color-surface)">
+    <div id="activity-cells" style="display:flex;gap:3px;overflow-x:auto;padding-bottom:4px"></div>
+    <div style="display:flex;align-items:center;gap:18px;margin-top:16px;padding-top:14px;border-top:1px solid var(--color-divider)">
+      <div id="activity-range" class="mono" style="font-size:11px;color:var(--color-neutral-700)">—</div>
+      <div style="display:flex;align-items:center;gap:6px;margin-left:auto">
+        <span class="mono" style="font-size:11px;color:var(--color-neutral-700)">Less</span>
+        <div style="width:12px;height:12px;background:var(--color-neutral-300)"></div>
+        <div style="width:12px;height:12px;background:var(--color-accent-200)"></div>
+        <div style="width:12px;height:12px;background:var(--color-accent-400)"></div>
+        <div style="width:12px;height:12px;background:var(--color-accent-500)"></div>
+        <div style="width:12px;height:12px;background:var(--color-accent-700)"></div>
+        <span class="mono" style="font-size:11px;color:var(--color-neutral-700)">More</span>
+      </div>
+    </div>
+  </div>
+  <div class="activity-stats" style="display:grid;grid-template-columns:repeat(4,1fr);border:2px solid var(--color-divider);border-top:0">
+    <div style="padding:14px 18px;border-right:1px solid var(--color-divider)"><div id="activity-streak" style="font:800 22px/1 var(--font-heading)">—</div><div class="mono" style="font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--color-neutral-700);margin-top:4px">longest streak</div></div>
+    <div style="padding:14px 18px;border-right:1px solid var(--color-divider)"><div id="activity-activedays" style="font:800 22px/1 var(--font-heading)">—</div><div class="mono" style="font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--color-neutral-700);margin-top:4px">active days</div></div>
+    <div style="padding:14px 18px;border-right:1px solid var(--color-divider)"><div style="font:800 22px/1 var(--font-heading)">10</div><div class="mono" style="font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--color-neutral-700);margin-top:4px">public repos</div></div>
+    <div style="padding:14px 18px"><div style="font:800 22px/1 var(--font-heading)">Python · Go</div><div class="mono" style="font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--color-neutral-700);margin-top:4px">most used</div></div>
+  </div>
+</section>
+
+<footer id="contact" style="background:var(--color-accent);color:var(--color-bg)">
+  <div class="wrap" style="padding-top:56px;padding-bottom:52px">
+    <h2 style="font-size:52px;line-height:.98;letter-spacing:-.03em;margin:0 0 20px;max-width:20ch">Got a hard problem in an unfamiliar domain?</h2>
+    <p style="font-size:17px;max-width:56ch;margin:0 0 30px;opacity:.92">Open to AI and software engineering roles: internships now, full-time from May 2027.</p>
+    <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:34px">
+      <a class="btn" href="mailto:hiteshbalegar@gmail.com" style="background:var(--color-bg);color:var(--color-accent);padding:12px 20px">hiteshbalegar@gmail.com</a>
+      <a class="btn" href="https://linkedin.com/in/hiteshbalegar" target="_blank" rel="noopener" style="border-color:rgba(255,255,255,.5);color:var(--color-bg);padding:12px 20px">LinkedIn ↗</a>
+      <a class="btn" href="https://dub.sh/github-hitesh" target="_blank" rel="noopener" style="border-color:rgba(255,255,255,.5);color:var(--color-bg);padding:12px 20px">GitHub ↗</a>
+      <a class="btn" href="https://dub.sh/hitesh-balegar" target="_blank" rel="noopener" style="border-color:rgba(255,255,255,.5);color:var(--color-bg);padding:12px 20px">Resume PDF ↓</a>
+    </div>
+    <div style="border-top:2px solid rgba(255,255,255,.35);padding-top:16px;display:flex;gap:16px;font-size:12px;opacity:.85">
+      <span class="mono">HITESH KUMAR BALEGAR</span><span class="mono" style="margin-left:auto">SALT LAKE CITY, UT</span>
+    </div>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+<script defer src="/_vercel/insights/script.js"></script>
+</body>
+</html>

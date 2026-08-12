@@ -1,0 +1,17 @@
+# Claude Code
+.claude/
+
+# Vercel
+.vercel/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
+
+# Env/secrets
+.env
+.env.local
