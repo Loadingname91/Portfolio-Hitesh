@@ -13,7 +13,7 @@
         "FastAPI",
         "LLM/VLM"
       ],
-      "repo": "https://dub.sh/RwA1nqi",
+      "repo": "https://github.com/Loadingname91/WhiteBoardAgent",
       "featured": true,
       "metrics": [
         [
@@ -96,7 +96,7 @@
         "hard": "Naive shaping produced agents that circled the board collecting intermediate rewards and never finished. Fixing it meant proving the shaping term was potential-based rather than tuning coefficients by feel.",
         "outcome": "61% win rate in 4-player competitive play, 2.4× a random baseline, across 40,000+ training episodes, with progressive win-rate targets met at every curriculum level."
       },
-      "repo": "https://dub.sh/y7SZqyM",
+      "repo": "https://github.com/Loadingname91/RLagentLudo",
       "gif": "https://raw.githubusercontent.com/Loadingname91/RLagentLudo/main/assets/demo_gameplay.gif"
     },
     {
@@ -188,7 +188,7 @@
         "hard": "Diagnostic accuracy had to hold. Every optimization was validated against the MATLAB baseline on Dice Similarity Coefficient rather than throughput alone.",
         "outcome": "Near-linear scaling across 1 to 4 CHPC worker nodes at target DSC above 0.85, benchmarked on end-to-end time and subjects-per-hour against the legacy pipeline."
       },
-      "repo": "https://dub.sh/IyQiAlp",
+      "repo": "https://github.com/Loadingname91/WMH-Spark",
       "gif": null
     },
     {
