@@ -180,6 +180,7 @@ a:hover{color:var(--color-accent)}
    ============================================================ */
 @media (max-width: 900px){
   .wrap{padding:0 22px}
+  #tldr .rv{grid-template-columns:1fr!important;gap:10px!important}
   .hero-grid{grid-template-columns:1fr!important}
   .hero-grid h1{font-size:44px!important}
   .hero-side{order:-1;max-width:260px}
