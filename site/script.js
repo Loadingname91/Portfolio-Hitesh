@@ -73,13 +73,23 @@
 
   function featuredCardHtml(p, idx) {
     const gifs = Array.isArray(p.gifs) && p.gifs.length ? p.gifs : (p.gif ? [p.gif] : []);
-    const gifLayers = gifs.map((g, i) => `<div class="gif${i === 0 ? ' active' : ''}" style="background-image:url(${esc(g)})"></div>`).join('');
+    const labels = Array.isArray(p.gifLabels) ? p.gifLabels : [];
+    const mediaFirst = !!p.mediaFirst && gifs.length > 0;
+    // Background images are applied lazily (see loadLayer) so demo GIFs don't download on page load.
+    const gifLayers = gifs.map((g, i) => `<div class="gif${i === 0 ? ' active' : ''}" data-bg="${esc(g)}"></div>`).join('');
     const gifTabs = gifs.length > 1 ? `
       <div class="gif-tabs">
-        ${gifs.map((_, i) => `<button type="button" class="gif-tab${i === 0 ? ' active' : ''}" data-gif-i="${i}" aria-label="Demo clip ${i + 1}">${i + 1}</button>`).join('')}
+        ${gifs.map((_, i) => `<button type="button" class="gif-tab${i === 0 ? ' active' : ''}" data-gif-i="${i}" aria-label="${esc(labels[i] ? 'Show ' + labels[i] : 'Demo clip ' + (i + 1))}">${esc(labels[i] || i + 1)}</button>`).join('')}
       </div>` : '';
-    const gifNote = gifs.length > 1 ? 'Tap or hover for the demo' : gifs.length === 1 ? 'Tap or hover for the demo' : 'Architecture overview';
-    const mediaMinHeight = gifs.length ? 320 : 200;
+    const fullLink = mediaFirst ? `<a class="media-full" href="${esc(gifs[0])}" target="_blank" rel="noopener">Full size ↗</a>` : '';
+    const gifNote = gifs.length ? 'Tap or hover for the demo' : 'Architecture overview';
+    const mediaMinHeight = mediaFirst ? 360 : gifs.length ? 320 : 200;
+    const mediaCls = 'media' + (gifs.length ? ' has-gif' : '') + (gifs.length > 1 ? ' has-tabs' : '') + (mediaFirst ? ' media-first touched' : '');
+    const links = [
+      p.repo ? `<a href="${esc(p.repo)}" class="mono" style="font-weight:600" target="_blank" rel="noopener">Repository ↗</a>` : '',
+      p.live ? `<a href="${esc(p.live)}" class="mono" style="font-weight:600" target="_blank" rel="noopener">Live site ↗</a>` : '',
+      p.private ? `<span class="private-tag mono">Private repo</span>` : ''
+    ].join('');
     const study = p.study || { problem: '', approach: '', hard: '', outcome: '' };
     return `
     <article class="fcard rv" data-title="${esc(p.title)}">
@@ -89,14 +99,14 @@
           <h3 style="margin:0;font-size:27px;letter-spacing:-.02em">${esc(p.title)}</h3>
           <p style="margin:0;font-size:14.5px;line-height:1.55;color:var(--color-neutral-800);text-wrap:pretty">${esc(p.blurb)}</p>
           <div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:2px">${tagsHtml(p.tags, 'tag-outline')}</div>
-          <div style="display:flex;gap:16px;align-items:center;margin-top:auto;padding-top:16px;font-size:13px">
+          <div style="display:flex;flex-wrap:wrap;gap:16px;align-items:center;margin-top:auto;padding-top:16px;font-size:13px">
             <button type="button" class="mono toggle-case" data-idx="${idx}" style="font-family:ui-monospace,Menlo,monospace;font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;padding:8px 14px;cursor:pointer;background:var(--color-accent);color:var(--color-on-accent);border:0">Case study ↓</button>
-            <a href="${esc(p.repo || '#')}" class="mono" style="font-weight:600" target="_blank" rel="noopener">Repository ↗</a>
+            ${links}
           </div>
         </div>
         <div class="feat-media" style="border-left:2px solid var(--color-divider);display:flex;flex-direction:column">
-          <div class="media${gifs.length ? ' has-gif' : ''}" style="flex:1;min-height:${mediaMinHeight}px;padding:20px;background:var(--color-bg);display:flex;flex-direction:column;justify-content:center;gap:12px;position:relative;overflow:hidden">
-            ${gifLayers}${gifTabs}
+          <div class="${mediaCls}" style="flex:1;min-height:${mediaMinHeight}px;padding:20px;background:var(--color-bg);display:flex;flex-direction:column;justify-content:center;gap:12px;position:relative;overflow:hidden">
+            ${gifLayers}${gifTabs}${fullLink}
             <div class="mono" style="font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--color-neutral-600)">Pipeline</div>
             <div class="archbox">${archHtml(p.arch)}</div>
             <div class="mono" style="font-size:10px;color:var(--color-neutral-600);margin-top:4px">${esc(gifNote)}</div>
@@ -126,13 +136,23 @@
   }
 
   function restCardHtml(p) {
+    const href = p.repo || p.live;
+    const tag = href ? 'a' : 'div';
+    const attrs = href ? ` href="${esc(href)}" target="_blank" rel="noopener"` : '';
     return `
-    <a class="scard rv" href="${esc(p.repo || '#')}" target="_blank" rel="noopener">
+    <${tag} class="scard rv"${attrs}>
       <span class="card-kicker">${esc(p.kicker)}</span>
       <h4 style="margin:0;font-size:18px;letter-spacing:-.01em;color:var(--color-text)">${esc(p.title)}</h4>
       <p style="margin:0;font-size:13px;line-height:1.5;color:var(--color-neutral-800);flex:1;text-wrap:pretty">${esc(p.blurb)}</p>
       <div style="display:flex;flex-wrap:wrap;gap:5px">${tagsHtml(p.tags, 'tag-neutral')}</div>
-    </a>`;
+    </${tag}>`;
+  }
+
+  // Apply a media layer's background image the first time it's needed.
+  function loadLayer(layer) {
+    if (!layer || layer.dataset.loaded) return;
+    layer.style.backgroundImage = `url("${layer.dataset.bg}")`;
+    layer.dataset.loaded = '1';
   }
 
   function writingRowHtml(w) {
@@ -174,7 +194,7 @@
 
   function renderWork(io) {
     const filtered = state.projects.filter(p => state.filter === 'All' || p.cat === state.filter);
-    const featured = filtered.filter(p => p.featured).slice(0, 3);
+    const featured = filtered.filter(p => p.featured).slice(0, 5);
     const rest = filtered.filter(p => !p.featured);
 
     const featEl = document.getElementById('work-featured');
@@ -193,14 +213,27 @@
         e.stopPropagation();
         const media = btn.closest('.media');
         const i = btn.dataset.gifI;
-        media.querySelectorAll('.gif').forEach((g, gi) => g.classList.toggle('active', String(gi) === i));
+        media.querySelectorAll('.gif').forEach((g, gi) => {
+          const on = String(gi) === i;
+          g.classList.toggle('active', on);
+          if (on) {
+            loadLayer(g);
+            const full = media.querySelector('.media-full');
+            if (full) full.href = g.dataset.bg;
+          }
+        });
         media.querySelectorAll('.gif-tab').forEach(d => d.classList.toggle('active', d === btn));
         media.classList.add('touched');
       });
     });
     featEl.querySelectorAll('.media.has-gif').forEach(media => {
-      media.addEventListener('click', () => media.classList.toggle('touched'));
+      const loadActive = () => loadLayer(media.querySelector('.gif.active'));
+      if (media.classList.contains('media-first')) loadActive();
+      media.addEventListener('mouseenter', loadActive);
+      media.addEventListener('touchstart', loadActive, { passive: true });
+      media.addEventListener('click', () => { loadActive(); media.classList.toggle('touched'); });
     });
+    featEl.querySelectorAll('.media-full').forEach(a => a.addEventListener('click', e => e.stopPropagation()));
 
     const restEl = document.getElementById('work-rest');
     restEl.innerHTML = rest.map(restCardHtml).join('');

@@ -1,7 +1,132 @@
 {
-  "_howto": "Add a project: copy an object in `projects` and edit it. featured:true promotes it to a large case-study card (keep 3). cat sets which filter chip it answers to. gif: a file path (.gif/.mp4/.png) shown on hover, or null to draw the `arch` pipeline boxes instead. `study` powers the expandable case study on featured cards.",
+  "_howto": "Add a project: copy an object in `projects` and edit it. featured:true promotes it to a large case-study card (up to 5 show). cat sets which filter chip it answers to. gif: a file path (.gif/.png/.jpg) shown on hover, or null to draw the `arch` pipeline boxes instead; gifs: [...] for several, with optional gifLabels: [...] as the tab names. mediaFirst:true shows the first image by default instead of the pipeline. repo / live: the links on the card; private:true adds a 'Private repo' label. `study` powers the expandable case study on featured cards.",
   "github": "Loadingname91",
   "projects": [
+    {
+      "cat": "Agents",
+      "title": "Host Plus One (VendorSpace)",
+      "kicker": "Lassonde Studios incubator · Tech engineer · 2026",
+      "blurb": "An email-first AI concierge for event planning. Hosts email a named concierge; 16 Pydantic AI agents read the thread, gather requirements, check policy and weather, and draft every reply. Staff source vendors, build packages and approve each stage in a 38-screen admin console, and hosts accept and pay on one Stripe page.",
+      "tags": [
+        "Pydantic AI",
+        "Claude",
+        "FastAPI",
+        "PostgreSQL",
+        "React 19",
+        "Stripe",
+        "Mailgun",
+        "Railway"
+      ],
+      "live": "https://hostplusone.com/",
+      "private": true,
+      "featured": true,
+      "mediaFirst": true,
+      "metrics": [
+        [
+          "AI agents",
+          "16"
+        ],
+        [
+          "Automated tests",
+          "2,200+"
+        ],
+        [
+          "API operations",
+          "250+"
+        ],
+        [
+          "Commits",
+          "290+"
+        ]
+      ],
+      "arch": [
+        "Host email",
+        "Planner agent",
+        "Inquiry + weather",
+        "Composer + checkers",
+        "Admin approval",
+        "Send / Stripe"
+      ],
+      "study": {
+        "problem": "Planning an event is weeks of email between a host and half a dozen vendors. An AI that simply writes the replies is a liability: it can leak a vendor's name before booking, quote a price nobody agreed to, or claim to be a person, and the host only ever sees the email.",
+        "approach": "FastAPI and Postgres with separate API, agent, workflow and delivery workers on a Postgres SKIP LOCKED job queue (no Redis). A planner agent routes each burst of host email to Inquiry (rulebook, weather) and Writing (composer plus checkers). Agents only propose: no model sends email, touches money or writes core tables, and an admin's recorded approval is the only thing that moves an event between its six stages.",
+        "hard": "Making model output safe to send. Every draft passes deterministic template, vendor-leak and identity-claim gates, then fact and tone checker agents; a failed draft gets exactly one rewrite, then fails closed to an admin. Quiet hours in the host's time zone, nudges, take-over and a global kill switch cover what a prompt can't.",
+        "outcome": "69 tables over 54 migrations, 250+ API operations and ~2,200 automated tests (pytest, Vitest, Playwright, axe accessibility checks) in CI. End-to-end suites run an event from first email to archived, and a model-routing eval scored 0 misses over 216 identity cases."
+      },
+      "gifs": [
+        "assets/projects/hostplusone/console-event.jpg",
+        "assets/projects/hostplusone/site-home.jpg",
+        "assets/projects/hostplusone/how-it-works.jpg"
+      ],
+      "gifLabels": [
+        "Console",
+        "Site",
+        "How it works"
+      ]
+    },
+    {
+      "cat": "Full-stack",
+      "title": "TabOS → Quilt",
+      "kicker": "Lassonde DevDay 2026 · Hackathon build",
+      "blurb": "TabOS is my design for a personal life OS: describe an app in a sentence and an agent assembles it from a few generic blocks over one shared data model, so budget, calendar and workouts can reason about each other. Quilt is the working slice we co-built for Lassonde DevDay, a phone-first web app where Clair, a Claude tool-calling agent, builds apps and plans across them through changes you confirm.",
+      "tags": [
+        "React 19",
+        "FastAPI",
+        "Claude API",
+        "Supabase",
+        "SSE",
+        "Vercel",
+        "Railway"
+      ],
+      "live": "https://quilt-seven.vercel.app/",
+      "private": true,
+      "featured": true,
+      "mediaFirst": true,
+      "metrics": [
+        [
+          "Agent tools",
+          "7"
+        ],
+        [
+          "API routes",
+          "35"
+        ],
+        [
+          "Tests",
+          "270+"
+        ],
+        [
+          "Team",
+          "2"
+        ]
+      ],
+      "arch": [
+        "Sentence",
+        "Clair agent loop",
+        "Planning brief",
+        "Proposed changes",
+        "User confirms",
+        "Realtime sync"
+      ],
+      "study": {
+        "problem": "A student's life is spread across a dozen single-purpose apps that can't see each other. Planning next week's training means checking a calendar, a workout log, a calorie tracker and a grocery list by hand.",
+        "approach": "TabOS (Aug 2026) specified the platform: 12 generic block primitives and a declarative spec instead of generated UI, one command service as the only write path, and a shared formula engine. For DevDay we co-built Quilt, a slice of it: a React 19 + Vite PWA on Vercel, a FastAPI API on Railway, Supabase Postgres with Realtime sync, and read-only Google Calendar. Clair is a hand-written Claude tool loop with SSE streaming and pause-to-ask, using Haiku for chat and Sonnet for building.",
+        "hard": "Letting an agent change your data without being silently wrong. Clair can only propose change sets that the user confirms and can undo, and every number it states comes from a planning brief computed in Python. The model arranges and words the facts; it never does the arithmetic.",
+        "outcome": "The demo: three typed sentences become three working apps (Calories, Running, Cycle). Then \"Plan my training for next week\" reads 9 apps plus Google Calendar, moves sessions that clash, and adds runs, a recovery to-do and groceries across 5 apps, synced live between phone and laptop."
+      },
+      "gifs": [
+        "assets/projects/quilt/home.jpg",
+        "assets/projects/quilt/talk-to-clair.gif",
+        "assets/projects/quilt/build-calories.gif",
+        "assets/projects/quilt/build-running.gif"
+      ],
+      "gifLabels": [
+        "Home",
+        "Clair",
+        "Calories",
+        "Running"
+      ]
+    },
     {
       "cat": "Agents",
       "title": "WhiteBoardAgent",

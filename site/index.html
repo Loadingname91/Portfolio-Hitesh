@@ -5,6 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Hitesh Kumar Balegar — Software Engineer, Applied AI</title>
 <meta name="description" content="Software engineer and MS CS (AI Track) student at the University of Utah. Five years of production engineering, now building AI systems that work in the real world.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://hiteshbalegar.dev/">
+<meta property="og:title" content="Hitesh Kumar Balegar — Software Engineer, Applied AI">
+<meta property="og:description" content="Software engineer and MS CS (AI Track) student at the University of Utah. Five years of production engineering, now building AI systems that work in the real world.">
+<meta name="twitter:card" content="summary">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23191817'/%3E%3Ctext x='32' y='44' font-family='Georgia,serif' font-size='40' fill='%23d97757' text-anchor='middle'%3EH%3C/text%3E%3C/svg%3E">
 <link rel="stylesheet" href="styles.css">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -64,6 +69,7 @@
     <ul class="bul" style="gap:7px">
       <li><b>Five years production engineering</b> at BETSOL, including a Fortune 10 healthcare client. <b>5M+ records a month at 99.9% uptime</b>, provisioning across 470+ locations.</li>
       <li><b>MS Computer Science, AI Track</b> at Utah, GPA 3.8. Research engineer in the Holmes Lab building distributed scientific pipelines.</li>
+      <li><b>Shipping AI products now:</b> tech engineer on <b>Host Plus One</b>, a 16-agent email concierge from the Lassonde Studios incubator, and co-builder of <b>Quilt</b>, a Claude-powered app builder made at Lassonde DevDay.</li>
       <li><b>Core stack:</b> Python, Go, TypeScript. FastAPI, Django, Node, React. PostgreSQL, Kafka, SQL.</li>
       <li><b>AI in production:</b> RAG over FAISS, Qdrant and Pinecone with RAGAS evaluation; LangGraph and LangChain agents; QLoRA fine-tuning; RL in PyTorch and Gymnasium.</li>
       <li><b>Scale and infrastructure:</b> Apache Spark on HPC clusters, Docker, Kubernetes and AKS, Helm, Terraform, GitHub Actions, AWS and Azure.</li>
@@ -85,9 +91,28 @@
 </section>
 
 <section class="wrap" id="experience" style="padding-top:44px;padding-bottom:20px">
-  <div class="sechd rv"><span class="n">02</span><h2>Experience</h2><span class="r">Five years industry · two research labs · two TA roles</span></div>
+  <div class="sechd rv"><span class="n">02</span><h2>Experience</h2><span class="r">Startup · five years industry · research &amp; teaching</span></div>
 
-  <h6 class="rv" style="margin:0 0 14px;color:var(--color-accent-700)">Industry · BETSOL, Bangalore</h6>
+  <h6 class="rv" style="margin:0 0 14px;color:var(--color-accent-700)">Startup · Lassonde Studios incubator</h6>
+  <div style="display:flex;flex-direction:column">
+    <div class="exp-row rv" style="display:grid;grid-template-columns:130px 6px 1fr;gap:20px;padding:22px 0;border-top:2px solid var(--color-divider);border-bottom:1px solid var(--color-divider)">
+      <div class="mono" style="font-size:12px;color:var(--color-neutral-700)">Sep 2026<br>present</div>
+      <div class="exp-bar" style="background:var(--color-accent);transition:background .18s"></div>
+      <div>
+        <h4 style="margin:0 0 2px;font-size:21px">Tech Engineer · Host Plus One (VendorSpace)</h4>
+        <div class="mono" style="font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--color-neutral-600);margin-bottom:12px">AI event-planning concierge · Python · React · Claude</div>
+        <button type="button" class="exp-toggle mono">Details ↓</button>
+        <ul class="bul">
+          <li><b>Multi-agent email concierge.</b> <em>16 Pydantic AI agents</em> on Claude read host email, gather requirements and draft replies. Every draft clears deterministic vendor-leak and identity gates plus fact and tone checker agents, and fails closed to a human.</li>
+          <li><b>Backend and payments.</b> FastAPI and Postgres (<em>69 tables, 250+ API operations</em>) with a SKIP LOCKED job queue, Mailgun email threading, Stripe Checkout and Connect, and TOTP-secured roles. API, workers and scheduler run as separate services on Railway.</li>
+          <li><b>Admin console.</b> React 19 and TypeScript console with work queues, approvals and a six-stage event pipeline with live agent progress, covered by <em>2,200+ automated tests</em> in CI. Wrote ~95% of <em>290+ commits</em>.</li>
+        </ul>
+        <div style="display:flex;flex-wrap:wrap;gap:5px;margin-top:14px"><span class="tag tag-neutral">Pydantic AI</span><span class="tag tag-neutral">Claude</span><span class="tag tag-neutral">FastAPI</span><span class="tag tag-neutral">PostgreSQL</span><span class="tag tag-neutral">React</span><span class="tag tag-neutral">Stripe</span><span class="tag tag-neutral">Railway</span></div>
+      </div>
+    </div>
+  </div>
+
+  <h6 class="rv" style="margin:34px 0 14px;color:var(--color-accent-700)">Industry · BETSOL, Bangalore</h6>
   <div style="display:flex;flex-direction:column;gap:0">
     <div class="exp-row rv" style="display:grid;grid-template-columns:130px 6px 1fr;gap:20px;padding:22px 0;border-top:2px solid var(--color-divider)">
       <div class="mono" style="font-size:12px;color:var(--color-neutral-700)">Aug 2020<br>Jun 2025<br><span style="color:var(--color-neutral-600)">4 yr 11 mo</span></div>
@@ -108,7 +133,7 @@
     </div>
 
     <div class="exp-row rv" style="display:grid;grid-template-columns:130px 6px 1fr;gap:20px;padding:22px 0;border-top:1px solid var(--color-divider)">
-      <div class="mono" style="font-size:12px;color:var(--color-neutral-700)">Sep 2020<br>Jun 2025<br><span style="color:var(--color-neutral-600)">client engagement</span></div>
+      <div class="mono" style="font-size:12px;color:var(--color-neutral-700)">Sep 2024<br>Jun 2025<br><span style="color:var(--color-neutral-600)">client engagement</span></div>
       <div class="exp-bar" style="background:var(--color-neutral-400);transition:background .18s"></div>
       <div>
         <h4 style="margin:0 0 2px;font-size:21px">Full Stack Software Engineer · CVS Health &amp; Aetna</h4>
@@ -178,7 +203,7 @@
     </div>
     <div style="padding:18px 20px;border-right:1px solid var(--color-divider)">
       <h6 style="margin:0 0 10px;color:var(--color-accent-700)">ML &amp; AI</h6>
-      <div style="display:flex;flex-wrap:wrap;gap:5px"><span class="tag tag-neutral">PyTorch</span><span class="tag tag-neutral">Transformers</span><span class="tag tag-neutral">PEFT / QLoRA</span><span class="tag tag-neutral">LangGraph</span><span class="tag tag-neutral">LlamaIndex</span><span class="tag tag-neutral">RAGAS</span><span class="tag tag-neutral">FAISS</span><span class="tag tag-neutral">Qdrant</span><span class="tag tag-neutral">Gymnasium</span></div>
+      <div style="display:flex;flex-wrap:wrap;gap:5px"><span class="tag tag-neutral">PyTorch</span><span class="tag tag-neutral">Transformers</span><span class="tag tag-neutral">PEFT / QLoRA</span><span class="tag tag-neutral">LangGraph</span><span class="tag tag-neutral">Pydantic AI</span><span class="tag tag-neutral">Claude API</span><span class="tag tag-neutral">LlamaIndex</span><span class="tag tag-neutral">RAGAS</span><span class="tag tag-neutral">FAISS</span><span class="tag tag-neutral">Qdrant</span><span class="tag tag-neutral">Gymnasium</span></div>
     </div>
     <div style="padding:18px 20px;border-right:1px solid var(--color-divider)">
       <h6 style="margin:0 0 10px;color:var(--color-accent-700)">Data &amp; distributed</h6>
@@ -186,7 +211,7 @@
     </div>
     <div style="padding:18px 20px">
       <h6 style="margin:0 0 10px;color:var(--color-accent-700)">Platform &amp; DevOps</h6>
-      <div style="display:flex;flex-wrap:wrap;gap:5px"><span class="tag tag-neutral">Docker</span><span class="tag tag-neutral">Kubernetes</span><span class="tag tag-neutral">Helm</span><span class="tag tag-neutral">GitHub Actions</span><span class="tag tag-neutral">Terraform</span><span class="tag tag-neutral">AWS</span><span class="tag tag-neutral">Azure AKS</span><span class="tag tag-neutral">Next.js</span></div>
+      <div style="display:flex;flex-wrap:wrap;gap:5px"><span class="tag tag-neutral">Docker</span><span class="tag tag-neutral">Kubernetes</span><span class="tag tag-neutral">Helm</span><span class="tag tag-neutral">GitHub Actions</span><span class="tag tag-neutral">Terraform</span><span class="tag tag-neutral">AWS</span><span class="tag tag-neutral">Azure AKS</span><span class="tag tag-neutral">Railway</span><span class="tag tag-neutral">Vercel</span><span class="tag tag-neutral">Supabase</span><span class="tag tag-neutral">Stripe</span><span class="tag tag-neutral">Playwright</span><span class="tag tag-neutral">Next.js</span></div>
     </div>
   </div>
 </section>
